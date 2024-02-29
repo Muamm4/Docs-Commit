@@ -1,0 +1,48 @@
+{
+    "types": {
+      "feat": {
+        "description": "Nova Funcionalidade",
+        "title": ":sparkles: feat"
+      },
+      "fix": {
+        "description": "Ajuste de Bug",
+        "title": ":wrench: fix"
+      },
+      "deploy": {
+        "description": "Deploy",
+        "title": ":rocket: deploy"
+      },
+      "move": {
+        "description": "Mover arquivos de diretório",
+        "title": ":truck: move"
+      },
+      "build": {
+        "description": "Build (arquitetura, etc.)",
+        "title": ":office: build"
+      },
+      "remove": {
+        "description": "Remoção de Arquivos",
+        "title": ":fire: fix"
+      },
+      "docs": {
+        "description": "Documentação",
+        "title": ":books: docs"
+      },
+      "style": {
+        "description": "Estilização",
+        "title": ":dizzy: style"
+      },
+      "refactor": {
+        "description": "Refatoração",
+        "title": ":recycle: refactor"
+      },
+      "perf": {
+        "description": "Performance",
+        "title": ":zap: perf"
+      },
+      "revert": {
+        "description": "Reversão do commit",
+        "title": ":leftwards_arrow_with_hook: revert"
+      }
+    }
+  }

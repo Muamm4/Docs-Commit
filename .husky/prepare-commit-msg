@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+#!/bin/bash
+exec < /dev/tty 1>&0 2>&0 && node_modules/.bin/cz --hook || true
