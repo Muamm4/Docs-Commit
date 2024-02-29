@@ -4,7 +4,7 @@ De acordo com a documentação do **[Conventional Commits](https://www.conventio
 Esses commits auxiliarão você e sua equipe a entenderem de forma facilitada quais alterações foram realizadas no trecho de código que foi commitado.
 Essa identificação ocorre por meio de uma palavra e emoji que identifica se aquele commit realizado se trata de uma alteração de código, atualização de pacotes, documentação, alteração de visual, teste...
 
-## Tipo e descrição 🦄
+# Tipo e descrição 🦄
 
 O commit semântico possui os elementos estruturais abaixo por tipos, que informam a intenção do seu commit ao utilizador(a) em seu código.
 
@@ -20,7 +20,7 @@ O commit semântico possui os elementos estruturais abaixo por tipos, que inform
 - `ci` - Commits do tipo ci indicam mudanças relacionadas a **integração contínua** (_continuous integration_).
 - `raw` - Commits to tipo raw indicam mudanças relacionadas a arquivos de configurações, dados, features, parametros.
 
-## Recomendações 🎉
+# Recomendações 🎉
 
 - Adicione um tipo consistente com o título do conteúdo.
 - Recomendamos que na primeira linha deve ter no máximo 4 palavras.
@@ -28,13 +28,17 @@ O commit semântico possui os elementos estruturais abaixo por tipos, que inform
 - Usar um emoji no início da mensagem de commit representando sobre o commit.
 - Os links precisam ser adicionados em sua forma mais autêntica, ou seja: sem encurtadores de link e links afiliados.
 
-## Complementos de commits 💻
+# Complementos de commits 💻
 
 - **Rodapé:** informação sobre o revisor e número do card no Trello ou Jira. Exemplo: Reviewed-by: Murilo Amaral Refs #28
 - **Corpo:** descrições mais precisas do que está contido no commit, apresentando impactos e os motivos pelos quais foram empregadas as alterações no código, como também instruções essenciais para intervenções futuras. Exemplo: see the issue for details on typos fixed.
 - **Descrições:** uma descrição sucinta da mudança. Exemplo: correct minor typos in code
 
 ## Padrões de emojis 💈
+
+É possível verificar a lista de emojis no arquivos <code>EMOJI.MD</code>
+
+Segue a baixo alguns exemplos
 
 <table>
   <thead>
@@ -308,6 +312,87 @@ O commit semântico possui os elementos estruturais abaixo por tipos, que inform
   </tbody>
 </table>
 
-## Ferramentas Para configurar os Commits
+# Ferramentas para configurar e padronizar seus Commits
 
-É possível utilizar o [<code>husky</code>](https://typicode.github.io/husky/), [<code>commitlint</code>](https://commitlint.js.org/) e [<code>commitizen</code>](https://commitizen-tools.github.io/commitizen/) para que seja feito uma configuração para padrões de commit automático
+É possível utilizar o [<code>husky</code>](https://typicode.github.io/husky/), [<code>commitlint</code>](https://commitlint.js.org/) e [<code>commitizen</code>](https://commitizen-tools.github.io/commitizen/) para que seja feito uma configuração para padrões de commit automático assim que for executado o comando <code> git commit </code>
+
+Caso tenha alguma duvida, é possível encontrar a documentação oficial nos links acima
+
+## Tutorial para instalação
+
+Existem duas maneiras para voce configurar seu ambiente
+
+### Clonando este repositório
+
+Somente é necessário executar esses comando para instalar as dependências e iniciar o <code>husky</code>
+
+<pre>
+  <code> npm i </code>
+  <code> npx husky install</code>
+</pre>
+
+Para Limpar o repositório para começar um novo projeto
+
+<pre>
+    <code> rm .git/ -rf </code>
+    <code> git init</code>
+</pre>
+
+### 1 - Instalação em um novo repositório
+
+#### Instalando as dependências
+
+<code>npm install --save-dev @commitlint/config-conventional @commitlint/cli</code>
+
+<code>echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js</code>
+
+#### 2 - Instalar o husky ele fará que quando for feito um commit ativara algumas funções
+
+<pre>
+  <code>npm install --save-dev husky</code>
+  <code>npx husky install</code>
+  <code>npx husky init</code>
+  <code>npx husky add .husky/commit-msg 'npx --no -- commitlint --edit ${1}'</code>
+</pre>
+
+Caso seja feito este passo, não é preciso executar os próximos comandos
+
+### 3 - Instalando o **Commitizen**
+
+<code>npx commitizen init cz-conventional-changelog --save-dev --save-exact</code>
+
+#### 3.1 - caso necessário em caso do rm **COMMIT_EDITMSG** ficar abrindo após o commit
+
+<pre>
+  
+  <code>git config --global core.editor true</code>
+   ou 
+  <code>git config --global core.editor "echo"</code>
+</pre>
+
+<pre>
+  <code>git config --global branch.autosetuprebase always</code>
+  <code>git config --global core.autocrlf false</code>
+</pre>
+
+### 4 - Configurações para o Commitizen personalizada
+
+Faça a alteração na seu **package.json**
+
+<pre>
+<code>...
+"config": {
+  "commitizen": {
+    "path": "./.cz/index.js"
+    }
+  }
+</code>
+</pre>
+
+#### Criação das configurações no diretório <code>.cz</code>
+
+É possível utilizar o código nesse repositório dentro do diretório <code> /.cz </code>
+
+Na diretório **<code>commitTypes</code>** se encontra os novos padrões de commit e em <code>engine.js</code> é possivel verificar as perguntas que são requisitadas ao se realizar o <code>git commit</code>
+
+OBS: Caso mude os tipos de commit, lembrar de mudar no arquivos <code>commitlini.config.js</code>
